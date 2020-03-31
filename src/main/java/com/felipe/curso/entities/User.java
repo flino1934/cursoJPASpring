@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 //A JPA vai criar uma tabela DB com os campos dos atributos da classe
 @Table(name = "tb_user")
@@ -30,6 +32,8 @@ public class User implements Serializable {
 	
 	@OneToMany(mappedBy = "client")//e esta falando que na classe order ele esta mapeado com o nome de "client", fazemos esse mapeamento para puxar pelo id do cliente os pedidos
 	//De um para muitos 
+	@JsonIgnore
+	//Para ignorar a associação de mão dupla um fica chamando o outro o tempo todo criando um looping infinito
 	private List<Order> orders = new ArrayList<>();//um usuario tem varios pedidos
 
 	public User() {

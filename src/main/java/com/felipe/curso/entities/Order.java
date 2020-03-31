@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 //Vai criar uma tabela no BD com os seguintes atributos dessa classe 
 @Table(name = "tb_order")
@@ -24,6 +26,8 @@ public class Order implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	//Auto incrementavel no banco
 	private Long id;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'",timezone = "GMT")
+	//Formatando o formato de data do JSON
 	private Instant moment;
 	
 	@ManyToOne
