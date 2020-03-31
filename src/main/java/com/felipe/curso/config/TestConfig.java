@@ -16,7 +16,7 @@ import com.felipe.curso.repositories.UserRepository;
 public class TestConfig implements CommandLineRunner{//criou um metodo que vai ser executado quando a aplicação for iniciada no perfil de teste
 
 	@Autowired
-	private UserRepository userRepository;
+	private UserRepository userRepository;//injeção de dependencia.
 	
 	
 
@@ -29,7 +29,7 @@ public class TestConfig implements CommandLineRunner{//criou um metodo que vai s
 		
 		userRepository.saveAll(Arrays.asList(u1,u2));//vai salvar os dados nesse array
 		
-	}//injeção de dependencia.
+	}
 	
 	
 	
