@@ -1,11 +1,14 @@
 package com.felipe.curso.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -24,6 +27,10 @@ public class User implements Serializable {
 	private String email;
 	private String phone;
 	private String password;
+	
+	@OneToMany(mappedBy = "client")//e esta falando que na classe order ele esta mapeado com o nome de "client", fazemos esse mapeamento para puxar pelo id do cliente os pedidos
+	//De um para muitos 
+	private List<Order> orders = new ArrayList<>();//um usuario tem varios pedidos
 
 	public User() {
 		// TODO Auto-generated constructor stub
@@ -76,6 +83,10 @@ public class User implements Serializable {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public List<Order> getOrders() {
+		return orders;
 	}
 
 	@Override
