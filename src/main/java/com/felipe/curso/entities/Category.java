@@ -8,8 +8,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 
@@ -26,7 +28,11 @@ public class Category implements Serializable {
 	//Auto incrementavel
 	private Long id;
 	private String name;
-	@Transient
+	
+	@ManyToMany(mappedBy = "categories")
+	//muitos para muitos, esta peassociado de categories
+	@JsonIgnore
+	//Para não ter o lupping infinito
 	private Set<Product>products = new HashSet<>();
 	
 	public Category() {
