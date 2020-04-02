@@ -42,7 +42,7 @@ public class Order implements Serializable {
 	//Nome da chave estrangeira que vai ter no banco
 	private User client;// O pedido tem um cliente
 	
-	@OneToMany(mappedBy = "id.order")
+	@OneToMany(mappedBy = "id.order")//ordemItem tem o id e o id tem o pedido(O id esta na classe OrdemItemPK)
 	private Set<OrderItem> items = new HashSet<>();
 
 	public Order() {

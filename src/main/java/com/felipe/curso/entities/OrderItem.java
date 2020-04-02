@@ -50,6 +50,7 @@ public class OrderItem implements Serializable {
 		
 	}
 	
+	
 	public Product getProduct() {
 		
 		return id.getProduct();//Vai ate a classe OrderItemPK e vai no metodo get que vai na classe Product e vamos trazer o id

@@ -11,7 +11,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 
@@ -39,6 +42,9 @@ public class Product implements Serializable {
 	//Definiu o nome da tabela e as colunas que vão associar
 	private Set<Category> categories = new HashSet<>();//Para garantir que o mesmo produto não tenha a MESMA categoria duas vezes mas ele pode ter duas categorias diferentes
 
+	@OneToMany(mappedBy = "id.product")//Ele vai na classe OrderItem ela vai vai mandar para classe OrdemItemPK que vai pegar pelo meo getProduct
+	private Set<OrderItem> items = new HashSet<>();
+	
 	public Product() {
 		// TODO Auto-generated constructor stub
 	}
@@ -94,6 +100,21 @@ public class Product implements Serializable {
 
 	public Set<Category> getCategories() {
 		return categories;
+	}
+	
+	
+	@JsonIgnore
+	public Set<Order> getOrders() {
+		
+		Set<Order> set  = new HashSet<>();
+		
+		for (OrderItem x : items) {//Vai adicionar TOdos os orders contidos em ordemitem
+			
+			set.add(x.getOrder());
+			
+		}
+		
+		return set;
 	}
 
 	@Override
