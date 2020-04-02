@@ -1,7 +1,5 @@
 package com.felipe.curso.entities.enums;
 
-import org.aspectj.weaver.ast.Or;
-
 public enum OrderStatus {
 
 	WATTING_PAYMENT(1),

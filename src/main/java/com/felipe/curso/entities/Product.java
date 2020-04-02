@@ -36,7 +36,7 @@ public class Product implements Serializable {
 	@ManyToMany
 	//Muitos para muitos.
 	@JoinTable(name = "tb_product_category",joinColumns = @JoinColumn(name = "product_id"),inverseJoinColumns = @JoinColumn(name = "category_id"))
-	//Definiu o nome da tabela e as colunas 
+	//Definiu o nome da tabela e as colunas que vão associar
 	private Set<Category> categories = new HashSet<>();//Para garantir que o mesmo produto não tenha a MESMA categoria duas vezes mas ele pode ter duas categorias diferentes
 
 	public Product() {
