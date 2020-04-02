@@ -6,6 +6,7 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.felipe.curso.entities.pk.OrderItemPK;
 
 @Entity
@@ -16,7 +17,7 @@ public class OrderItem implements Serializable {
 
 	@EmbeddedId
 	//É um id composto que retorna de outra classe 
-	private OrderItemPK id;
+	private OrderItemPK id = new OrderItemPK();
 
 	private Integer quantity;
 	private Double price;
@@ -35,7 +36,8 @@ public class OrderItem implements Serializable {
 		this.price = price;
 		
 	}
-	
+	@JsonIgnore
+	//estava tendo um problema de referencia ciclica chamava o pedido e o pedido chava itemdopedido
 	public Order getOrder() {
 		
 		return id.getOrder();//Vai ate a classe OrderItemPK e vai no metodo get que vai na classe order e vamos trazer o id
