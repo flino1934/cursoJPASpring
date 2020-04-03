@@ -46,4 +46,23 @@ public class UserService {
 		
 	}
 	
+	public User update(Long id,User obj) {//Vai chamar a operação insert() da interface UserRepository que extends JpaRepository
+ 		
+		User entity = repository.getOne(id);//Vai monitorar o objeto
+		updateData(entity,obj);//Vai chamar o metodo
+		return repository.save(entity);//Vai retornar o obj salvo
+		
+	}
+
+
+	private void updateData(User entity, User obj) {//Vai atualizar e restringir os campos que podem ser atualizados 
+		
+		entity.setName(obj.getName());//Vai atualizar o nome
+		entity.setEmail(obj.getEmail());//Vai atualizar o email
+		entity.setPhone(obj.getPhone());//Vai atualizar o telefone
+		
+	}
+	
+	
+	
 }
