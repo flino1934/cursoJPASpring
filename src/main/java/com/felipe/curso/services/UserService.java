@@ -40,4 +40,10 @@ public class UserService {
 		
 	}
 	
+	public void delete(Long id) {//Vai chamar a operação delete() da interface UserRepository que extends JpaRepository
+ 		
+		repository.deleteById(id);//Vai passar o id que sera deletado
+		
+	}
+	
 }
