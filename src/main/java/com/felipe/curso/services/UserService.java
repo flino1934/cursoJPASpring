@@ -34,4 +34,10 @@ public class UserService {
 		
 	}
 	
+	public User insert(User obj) {//Vai chamar a operação insert() da interface UserRepository que extends JpaRepository
+ 		
+		return repository.save(obj);//Vai retornar o obj salvo
+		
+	}
+	
 }
