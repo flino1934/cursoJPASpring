@@ -5,6 +5,7 @@ import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -42,9 +44,14 @@ public class Order implements Serializable {
 	//Nome da chave estrangeira que vai ter no banco
 	private User client;// O pedido tem um cliente
 	
-	@OneToMany(mappedBy = "id.order")//ordemItem tem o id e o id tem o pedido(O id esta na classe OrdemItemPK)
+	@OneToMany(mappedBy = "id.order")//ordemItem tem o id, e o id tem o pedido(O id esta na classe OrdemItemPK)
+	//um para mitos
 	private Set<OrderItem> items = new HashSet<>();
 
+	@OneToOne(mappedBy = "order",cascade = CascadeType.ALL)//cascade = CascadeType.ALL -> foi colocado pois ambos precisam ter o mesmo ID quando a relação é um para um
+	//Um para um, esse é o lado independente, pois podemos ter um pedido sem pagamento mas não ao contrario
+	private Payment payment; 
+	
 	public Order() {
 		// TODO Auto-generated constructor stub
 	}
@@ -78,13 +85,13 @@ public class Order implements Serializable {
 	}
 
 	public void setOrderStatus(OrderStatus orderStatus) {
-		
+
 		if (orderStatus != null) {
-			
-			this.orderStatus = orderStatus.getCode();//vai receber um valor tipo orderStatus e vai precisar armazenar um inteiro	
-		
+
+			this.orderStatus = orderStatus.getCode();// vai receber um valor tipo orderStatus e vai precisar armazen um inteiro
+
 		}
-		
+
 	}
 
 	public User getClient() {
@@ -93,6 +100,14 @@ public class Order implements Serializable {
 
 	public void setClient(User client) {
 		this.client = client;
+	}
+
+	public Payment getPayment() {
+		return payment;
+	}
+
+	public void setPayment(Payment payment) {
+		this.payment = payment;
 	}
 
 	public Set<OrderItem> getItems() {
