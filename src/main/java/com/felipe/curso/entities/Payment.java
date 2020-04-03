@@ -8,9 +8,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MapsId;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 //Vai criar uma tabela no BD com os seguintes atributos
@@ -26,6 +27,7 @@ public class Payment implements Serializable {
 	private Long id;
 	private Instant date;
 
+	@JsonIgnore
 	@OneToOne
 	@MapsId
 	//Um para um, só que a classe pagamento é a classe dependente pois pode ter pedido sem pagamento mas não pode ter pagamento sem pedido
