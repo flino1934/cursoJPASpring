@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.felipe.curso.entities.User;
 import com.felipe.curso.repositories.UserRepository;
+import com.felipe.curso.services.exceptions.ResourceNotFoundException;
 
 
 
@@ -30,7 +31,7 @@ public class UserService {
 	public User findById(Long id) {//Vai chamar a operação findAll() da interface userRepository que extend JpaRepository que já uma classe pronta da jpa e vai buscar o usuario por ID
 		
 		Optional<User> obj = repository.findById(id);//vai passar o id como argumento
-		return obj.get();//Vai retornar oq estiver dentro do <>
+		return obj.orElseThrow(() -> new ResourceNotFoundException(id));//Vai retornar oq estiver dentro do <> se não ele vai lançar uma excptions
 		
 	}
 	
